@@ -42,14 +42,9 @@ app.add_middleware(
 # =========================
 # ดึงค่าจาก ENV ถ้าไม่มีให้ใช้ localhost (แต่อย่าลืมตั้งใน Render นะอ้าย)
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000").rstrip("/")
-origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://lanna-frontend.onrender.com",
-    "https://lannavegwed-frontend.onrender.com",
-    "https://lannavegwed-frontend-e21b.onrender.com",# ใส่เผื่อไว้เลยกันพลาด
-    FRONTEND_URL,
-]
+
+origins = settings.ALLOWED_ORIGINS  # ✅ ใช้จาก settings แทน
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
